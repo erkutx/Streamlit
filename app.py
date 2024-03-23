@@ -37,7 +37,7 @@ with st.form("entry_form",clear_on_submit = True):
   col2.selectbox("Select Year:", years, key="year")
 
 
-"---"
+  "---"
 
 with st.expander("Income"):
   for income in incomes:
@@ -46,7 +46,26 @@ with st.expander("Income"):
 with st.expander("Expenses"):
   for expense in expenses:
     st.number_input(f"{expense}:", min_value=0, format="%i",step=10, key=expense) 
+with st.expander("Commnent"):
+  comment = st.text_area("",placeholder="Enter a comment here...")
 
+  "---"
+
+
+submitted = st.form_submit_button("Save Data")
+if submitted:
+  period = str(st.session_steal["year"]) + "" + (st.session_steal["month"])
+  incomes = {income: st.session_state[income] for income in incomes}
+  expenses = {expense: st.session_state[expense] for expense in expenses}
+  
+# TODO:insert values into database 
+  st.write(f"incomes: {incomes}")
+  st.write(f"expenses: {expenses}")
+  st.success("Data saved!")
+
+  # ----------- PLOT PERIODS -------------
+
+  
 
 
 
