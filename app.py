@@ -37,7 +37,7 @@ with st.form("entry_form",clear_on_submit = True):
   col2.selectbox("Select Year:", years, key="year")
 
 
-  "---"
+"---"
 
 with st.expander("Income"):
   for income in incomes:
@@ -94,4 +94,20 @@ if submitted:
 
 
 
+      # Create sankey chart
+      label = list(incomes.keys ()) + ["Total Income"] + list(expenses. keys ())
+      source = list(range(len(incomes))) + [len(incomes)] * len(expenses)
+      target = [len(incomes)] * len(incomes) + [label.index(expense) for expense in expenses. keys ()]
+      value = list(incomes.values ()) + list(expenses.values ( ))
 
+
+
+      # Data to dict, dict to sankey
+      link = dict (source=source, target=target, value=value)
+      node = dict(label=label, pad=30, thickness=30, color="#E694FF") # TRY W/O THE COLOR CODE !!
+      
+      data = go. Sankey (link=link, node=node)
+      # Plot it!
+      fig = go.Figure(data)
+      fig.update_layout (margin=dict (1==0, r=0, t=5, b=5))
+      st.plotly_chart(fig, use_container_width = True)
