@@ -49,12 +49,12 @@ with st.expander("Expenses"):
 with st.expander("Commnent"):
   comment = st.text_area("",placeholder="Enter a comment here...")
 
-  "---"
+  
 
-
+"---"
 submitted = st.form_submit_button("Save Data")
 if submitted:
-  period = str(st.session_steal["year"]) + "" + (st.session_steal["month"])
+  period = str(st.session_steal["year"]) + "_" + (st.session_steal["month"])
   incomes = {income: st.session_state[income] for income in incomes}
   expenses = {expense: st.session_state[expense] for expense in expenses}
   
@@ -65,8 +65,32 @@ if submitted:
 
   # ----------- PLOT PERIODS -------------
 
-  
 
+#if selected == "Data Visualization":
+  st.header("Data Visualization")
+  with st.form("saved_periods"):
+    # TODO: Get periods from db
+    period = st.selectbox("Select Period" , ["2022_March"])
+    submitted = st.form_submit_button("Plot Period")
+    if submitted:
+      # TODO:Get Data from database
+      comment = "Some comment"
+      incomes = {'Salary': 1500, 'Blog': 50, 'Other Income': 10}
+      expenses = {'Rent': 600, 'Utilities': 200,'Groceries': 300,  'Car': 100, 'Other Expenses': 50, 'Saving': 10}
+
+
+
+      #Create metrics
+      total_income = sum(incomes.values())
+      total_expense = sum(expenses())
+      remaining_budget = total_income - total_expense
+      col1,col2,col3 = st.columns(3)
+      col1.metric("Total Income", f"{total_income} {currency}")
+      col2.metric("Total Expense", f"{total_expense} {currency}")
+      col3.metric("Remaining Budget", f"{remaining_budget} {currency}")
+      st.text(f"Comment: {comment}")
+
+   
 
 
 
