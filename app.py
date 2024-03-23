@@ -1,5 +1,5 @@
-import streamlit as st # pip install streamlit
-import plotly.grapgh_objects as go # pipi install plotly 
+import plotly.graph_objects as go  # pip install plotly
+import streamlit as st  # pip install streamlit
 
 
 # ---------------- Settings -----------------
@@ -13,10 +13,9 @@ layout = 'centered'
 
 # ---------------------
 
-st.set_page_config (page_title-page_title,page_icon-page_icon, layout=layout) 
+st.set_page_config (page_titl=page_title,page_icon=page_icon, layout=layout) 
 
-st.title(page_title + " " page_icon)
-
+st.title(page_title + " " + page_icon)
 
 
 
