@@ -104,8 +104,7 @@ if submitted:
 
       # Data to dict, dict to sankey
       link = dict (source=source, target=target, value=value)
-      node = dict(label=label, pad=30, thickness=30, color="#E694FF") # TRY W/O THE COLOR CODE !!
-      
+      node = dict(label=label, pad=30, thickness=30, color="#E694FF") 
       data = go. Sankey (link=link, node=node)
       # Plot it!
       fig = go.Figure(data)
