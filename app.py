@@ -110,3 +110,5 @@ if submitted:
       fig = go.Figure(data)
       fig.update_layout (margin=dict (1==0, r=0, t=5, b=5))
       st.plotly_chart(fig, use_container_width = True)
+
+
