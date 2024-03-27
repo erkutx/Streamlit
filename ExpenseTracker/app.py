@@ -79,16 +79,20 @@ if submitted:
     st.text(f"Comment: {comment}")
 
     # Create sankey chart
-    label = list(incomes.keys()) + ["Total Income"] + list(expenses.keys())
-    source = list(range(len(incomes))) + [len(incomes)] * len(expenses)
-    target = [len(incomes)] * len(incomes) + [label.index(expense) for expense in expenses.keys()]
-    value = list(incomes.values()) + list(expenses.values())
+label = list(incomes.keys()) + ["Total Income"] + list(expenses.keys())
+source = list(range(len(incomes))) + [len(incomes)] * len(expenses)
+target = [len(incomes)] * len(incomes) + [label.index(expense) for expense in expenses.keys()]
+value = list(incomes.values()) + list(expenses.values())
 
-    # Data to dict, dict to sankey
-    link = dict(source=source, target=target, value=value)
-    node = dict(label=label, pad=30, thickness=30, color="#E694FF")
-    data = go.Sankey(link=link, node=node)
-    # Plot it!
-    fig = go.Figure(data)
-    fig.update_layout(margin=dict(l=0, r=0, t=5, b=5))
-    st.plotly_chart(fig, use_container_width=True)
+# Define colors for nodes
+node_colors = ['#FF5733', '#33FF57', '#3366FF', '#FF33FF', '#FFFF33', '#33FFFF', '#FF5733']
+
+# Data to dict, dict to sankey
+link = dict(source=source, target=target, value=value)
+node = dict(label=label, pad=30, thickness=30, color=node_colors)  # Assign colors to nodes
+data = go.Sankey(link=link, node=node)
+
+# Plot it!
+fig = go.Figure(data)
+fig.update_layout(margin=dict(l=0, r=0, t=5, b=5))
+st.plotly_chart(fig, use_container_width=True)
